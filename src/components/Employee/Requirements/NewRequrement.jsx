@@ -9,9 +9,14 @@ function NewRequrement({ SearchInput, SortType, EmployeeId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setInterval(() => {
+    const id = setInterval(() => {
+      console.log("interval");
       dispatch(fechUnAssignQuery());
-    }, 10000);
+    }, 5000);
+
+    return () => {
+      clearInterval(id);
+    };
   }, []);
 
   var UAQuery = useSelector((state) => state.query.UnassignQuery);

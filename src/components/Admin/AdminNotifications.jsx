@@ -21,6 +21,7 @@ function AdminNotifications() {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
       credentials: "include",
     };
 
@@ -69,6 +70,7 @@ function AdminNotifications() {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
 

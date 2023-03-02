@@ -39,6 +39,7 @@ function ActiveClientSidebar() {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
         };
 
@@ -70,6 +71,7 @@ function ActiveClientSidebar() {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
         };
 
@@ -117,6 +119,7 @@ function ActiveClientSidebar() {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
         };
 

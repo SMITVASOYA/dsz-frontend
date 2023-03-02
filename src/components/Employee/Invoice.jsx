@@ -170,6 +170,7 @@ function Invoice() {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
     axios(config)

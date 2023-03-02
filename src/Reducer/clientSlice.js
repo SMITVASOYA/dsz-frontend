@@ -38,6 +38,7 @@ export function fechActiveClients() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                withCredentials:true,
                 credentials: 'include',
             };
 
@@ -79,6 +80,7 @@ export function fechBlockClients() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                withCredentials:true,
                 credentials: 'include',
             };
 

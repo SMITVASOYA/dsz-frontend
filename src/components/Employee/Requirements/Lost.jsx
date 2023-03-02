@@ -1,15 +1,32 @@
-import { useEffect } from "react";
-import { fechLostQuery, setMDSidebar } from "../../../Reducer/querySclice";
+import { useCallback, useEffect, useState } from "react";
+import {
+  fechLostQuery,
+  selectedQueiresSetter,
+  setMDSidebar,
+  setSelectedQueries,
+} from "../../../Reducer/querySclice";
 import { setLQID } from "../../../Reducer/querySclice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 function Lost({ SearchInput, SortType, EmployeeId }) {
+  const selectedQueries = useSelector((state) => state.query.selectedQueries);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fechLostQuery(EmployeeId));
+    dispatch(setSelectedQueries([]));
   }, []);
+
+  const queriesSelector = useCallback(
+    (id) => {
+      dispatch(selectedQueiresSetter(selectedQueries, id));
+    },
+    [selectedQueries]
+  );
+
+  console.log(selectedQueries, "selected in lost");
 
   var LQuery = useSelector((state) => state.query.LostQuery);
   var LQID = useSelector((state) => state.query.LQID);
@@ -95,7 +112,16 @@ function Lost({ SearchInput, SortType, EmployeeId }) {
                 className="px-4 py-2 mx-4 my-2 flex justify-between bg-white shadow-md  rounded-md"
                 key={index}
               >
-                <div className="w-[50%] pr-3">
+                <div className="w-[10%] flex items-center justify-center">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={selectedQueries?.includes(q?.query_id)}
+                      onChange={(e) => queriesSelector(q?.query_id)}
+                    />
+                  </div>
+                </div>
+                <div className="w-[40%] pr-3">
                   <h1
                     className={`text-base font-400 whitespace-nowrap text-ellipsis max-w-sm overflow-hidden  ${
                       LQID === q.query_id ? "text-[#50d71e]" : "text-[black]"

@@ -32,6 +32,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
     axios(config)
@@ -137,6 +138,7 @@ function AddNewRequest({ visible, close }) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true,
         credentials: "include",
       };
 
@@ -174,6 +176,7 @@ function AddNewRequest({ visible, close }) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true,
         credentials: "include",
       };
 
@@ -224,6 +227,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };
@@ -332,6 +336,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import Employee from "./view/Employee";
 import Hr from "./view/Hr";
@@ -18,17 +18,21 @@ function App() {
   const UserDetails = useSelector((state) => state.user);
 
   const dispach = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   // const User = UserDetails.auth;
   // const User = true;
   useEffect(() => {
+    console.log("hello");
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const user = JSON.parse(localStorage.getItem("user"));
     setIsLoggedIn(isLoggedIn);
     if (isEmpty(UserDetails)) {
+      console.log("cool");
       dispach(setUser(user));
       dispach(setDept(user?.employee_department));
       dispach(setEmployeeId(user?.employee_id));
-      // dispach(fetchProducts());
+      dispach(fetchProducts());
 
       if (user?.employee_isAdmin === 1) {
         dispach(setAuth("Admin"));
@@ -37,8 +41,16 @@ function App() {
       } else {
         dispach(setAuth("Employee"));
       }
+
+      if (user?.employee_isAdmin === 1) {
+        navigate("/admin");
+      } else if (user?.employee_department === "Employee") {
+        navigate("/employee");
+      } else if (user?.employee_department === "hr") {
+        navigate("/hr");
+      }
     }
-  }, [UserDetails]);
+  }, [UserDetails, location.pathname]);
 
   return (
     <div>

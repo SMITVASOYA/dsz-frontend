@@ -120,6 +120,7 @@ function EditEmployeeDetails({ visible, close, Employee, Employee_Bank_info }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
             data: data
         };
@@ -212,6 +213,7 @@ function EditEmployeeDetails({ visible, close, Employee, Employee_Bank_info }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
             data: data
         };

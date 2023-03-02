@@ -24,6 +24,7 @@ function Notifcations() {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
 
@@ -50,6 +51,7 @@ function Notifcations() {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
 

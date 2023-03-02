@@ -66,6 +66,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
 
@@ -106,6 +107,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };
@@ -180,6 +182,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };
@@ -254,6 +257,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };

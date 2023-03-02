@@ -58,6 +58,7 @@ function AddnewClient({ visible, close }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                withCredentials:true,
                 credentials: 'include',
             };
 
@@ -95,6 +96,7 @@ function AddnewClient({ visible, close }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                withCredentials:true,
                 credentials: 'include',
             };
 
@@ -146,6 +148,7 @@ function AddnewClient({ visible, close }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
             data: data
         };

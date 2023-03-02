@@ -40,7 +40,7 @@ function Login() {
     var config = {
       method: "post",
       url: `${process.env.REACT_APP_HOST}/api/auth`,
-      // withCredentials: true,
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
       },
@@ -60,7 +60,6 @@ function Login() {
           console.log(response.data, "Res");
           // console.log(JSON.stringify(response.data));
           // console.log(response.headers)
-
           var result = response.data;
 
           if (result.error) {
@@ -93,8 +92,8 @@ function Login() {
         })
         .catch(function (error) {
           // console.log(error.response.data);
-
-          var result = error.response.data;
+          console.log(error, "error");
+          var result = error?.response?.data;
 
           console.log(result);
 

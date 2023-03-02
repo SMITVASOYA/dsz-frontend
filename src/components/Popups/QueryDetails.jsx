@@ -25,6 +25,7 @@ function QueryDetails({ visible, close, QueryId, Query, Client }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
         };
 
@@ -56,6 +57,7 @@ function QueryDetails({ visible, close, QueryId, Query, Client }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
         };
 

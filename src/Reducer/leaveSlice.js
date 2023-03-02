@@ -30,6 +30,7 @@ export function fetchActiveLeaveReq() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true,
         credentials: "include",
       };
 
@@ -60,6 +61,7 @@ export function fetchArchiveLeaveReq() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true,
         credentials: "include",
       };
 
@@ -90,6 +92,7 @@ export function fetchEmployeeLeavesReq(EmployeeId) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials:true,
         credentials: "include",
       };
 

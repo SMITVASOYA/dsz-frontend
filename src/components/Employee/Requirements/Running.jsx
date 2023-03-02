@@ -1,20 +1,37 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ClientRequest from "../ClientRequest";
-import { fechAssignQuery, setMDSidebar } from "../../../Reducer/querySclice";
+import {
+  fechAssignQuery,
+  selectedQueiresSetter,
+  setMDSidebar,
+  setSelectedQueries,
+} from "../../../Reducer/querySclice";
 import { setAQID } from "../../../Reducer/querySclice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setSortFilterType } from "../../../Reducer/filtersSlice";
 
 function Running({ SearchInput, SortType, EmployeeId }) {
+  // const [selectedQueries, setSelectedQueries] = useState([]);
   const dispatch = useDispatch();
 
   var AQuery = useSelector((state) => state.query.AssignQuery);
   const AQID = useSelector((state) => state.query.AQID);
+  const selectedQueries = useSelector((state) => state.query.selectedQueries);
+
   useEffect(() => {
     dispatch(fechAssignQuery(EmployeeId));
+    dispatch(setSelectedQueries([]));
   }, []);
 
+  const queriesSelector = useCallback(
+    (id) => {
+      dispatch(selectedQueiresSetter(selectedQueries, id));
+    },
+    [dispatch, selectedQueries]
+  );
+
+  console.log(selectedQueries, "selected");
   useEffect(() => {
     if (AQuery?.length > 0 && AQID === "") {
       dispatch(setAQID(AQuery?.[0]?.query_id));
@@ -22,6 +39,7 @@ function Running({ SearchInput, SortType, EmployeeId }) {
   }, [AQuery]);
 
   if (AQuery && SearchInput) {
+    console.log("it");
     AQuery = AQuery.filter(
       ({ query_subject }) =>
         query_subject &&
@@ -111,7 +129,21 @@ function Running({ SearchInput, SortType, EmployeeId }) {
                 className="px-4 py-2 mx-4 my-2 flex justify-between bg-white shadow-md  rounded-md"
                 key={index}
               >
-                <div className="w-[50%] pr-3">
+                <div className="w-[10%] flex items-center justify-center">
+                  <div>
+                    {console.log(
+                      selectedQueries?.includes(q?.query_id),
+                      "cool"
+                    )}
+                    <input
+                      type="checkbox"
+                      // value={selectedQueries?.includes(q?.query_id)}
+                      onChange={() => queriesSelector(q?.query_id)}
+                      checked={selectedQueries?.includes(q?.query_id)}
+                    />
+                  </div>
+                </div>
+                <div className="w-[40%] pr-3">
                   <h1
                     className={`text-base font-400 whitespace-nowrap text-ellipsis max-w-[290px] overflow-hidden ${
                       AQID === q.query_id ? "text-[#50d71e]" : "text-[black]"
@@ -145,7 +177,6 @@ function Running({ SearchInput, SortType, EmployeeId }) {
                     {" "}
                     View{" "}
                   </button>
-                  {console.log(q.query_id, "q.query_id")}
                 </div>
               </div>
             );

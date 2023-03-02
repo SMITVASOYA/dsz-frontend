@@ -74,6 +74,7 @@ function EditQuery({ visible, close, ReqDetails, EmployeeId }) {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
             data: data
         };

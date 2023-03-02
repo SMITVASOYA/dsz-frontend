@@ -7,8 +7,11 @@ const querySlice = createSlice({
   initialState: {
     UAQID: "",
     AQID: "",
+    LQID: "",
+    CQID: "",
     latestQuotation: {},
     currentQueryState: "New",
+    selectedQueries: [],
   },
   reducers: {
     setUnassignQuery(state, action) {
@@ -50,6 +53,9 @@ const querySlice = createSlice({
     setCurrentQueryState(state, action) {
       state.currentQueryState = action.payload;
     },
+    setSelectedQueries(state, action) {
+      state.selectedQueries = action.payload;
+    },
   },
 });
 
@@ -66,6 +72,7 @@ export const {
   setInvoices,
   setLatestQuotation,
   setMDSidebar,
+  setSelectedQueries,
   setCurrentQueryState,
 } = querySlice.actions;
 export default querySlice.reducer;
@@ -80,6 +87,7 @@ export function fechUnAssignQuery() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -117,6 +125,7 @@ export function fechAssignQuery(EmployeeId) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -154,6 +163,7 @@ export function fechLostQuery(EmployeeId) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -191,6 +201,7 @@ export function fechCloseQuery(EmployeeId) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -229,6 +240,7 @@ export function fetchQuotations(AQID) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -264,6 +276,7 @@ export function fetchInvoices(AQID) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -299,6 +312,7 @@ export function fetchLatestQuotation(AQID) {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -335,6 +349,20 @@ export function fetchLatestQuotation(AQID) {
         });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function selectedQueiresSetter(selectedQueries, id) {
+  return function selectedQuerySetter(dispatch) {
+    const allSelectedQueries = [...selectedQueries];
+    if (allSelectedQueries?.includes(id)) {
+      const index = allSelectedQueries.indexOf(id);
+      allSelectedQueries?.splice(index, 1);
+      dispatch(setSelectedQueries(allSelectedQueries));
+    } else {
+      allSelectedQueries.push(id);
+      dispatch(setSelectedQueries(allSelectedQueries));
     }
   };
 }

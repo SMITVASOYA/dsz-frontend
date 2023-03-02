@@ -40,6 +40,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
     };
 
@@ -79,6 +80,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };
@@ -162,6 +164,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials:true,
       credentials: "include",
       data: data,
     };

@@ -94,6 +94,7 @@ function Products() {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials:true,
             credentials: 'include',
             data: data
         };
