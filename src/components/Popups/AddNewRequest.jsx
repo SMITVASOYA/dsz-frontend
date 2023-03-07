@@ -739,10 +739,10 @@ function AddNewRequest({ visible, close }) {
                   Choose here
                 </option>
 
-                {Object.keys(productDetails).map((product, id) => {
+                {source.map((name, id) => {
                   return (
-                    <option value={product} id={id}>
-                      {product}
+                    <option value={name} id={id}>
+                      {name}
                     </option>
                   );
                 })}
