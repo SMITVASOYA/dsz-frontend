@@ -13,6 +13,7 @@ import {
   fetchLatestQuotation,
   fetchQuotations,
   setAQID,
+  setInvoices,
   setQuotations,
 } from "../../../Reducer/querySclice";
 import { setClient } from "../../../Reducer/userSlice";
@@ -22,6 +23,7 @@ import ReqDetails from "./ReqDetails";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import EditQuery from "../../Popups/EditQuery";
 import ViewQuotation from "../../Popups/ViewQuotation";
+import ViewInvoice from "../../Popups/ViewInvoice";
 
 function RunningSidebar({ EmployeeId }) {
   const dispatch = useDispatch();
@@ -44,17 +46,23 @@ function RunningSidebar({ EmployeeId }) {
   const [QuotationFileName, setQuotationFileName] = useState("");
   const [QuotationData, setQuotationData] = useState({});
 
+  // for View Invoices
+  const [InvoiceFileName, setInvoiceFileName] = useState("");
+  const [InvoiceData, setInvoiceData] = useState({});
+
   // fatching data from reducers
   const Querys = useSelector((state) => state.query.AssignQuery);
   const AQID = useSelector((state) => state.query.AQID);
   const Quotation = useSelector((state) => state.query.Quotations);
   const latestQuotation = useSelector((state) => state.query.latestQuotation);
+  const Invoices = useSelector((state) => state.query.Invoices);
 
   //fatching Quotaions
   useEffect(() => {
     console.log("cool aqid log");
     dispatch(setQuotations([]));
     dispatch(fetchQuotations(AQID));
+    dispatch(setInvoices([]));
     dispatch(fetchInvoices(AQID));
   }, [AQID]);
 
@@ -66,7 +74,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
     };
 
@@ -107,7 +115,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -182,7 +190,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -257,7 +265,7 @@ function RunningSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -334,6 +342,7 @@ function RunningSidebar({ EmployeeId }) {
   const invoiceGenerator = () => {
     dispatch(fetchLatestQuotation(AQID));
   };
+
   useEffect(() => {
     if (Object.keys(latestQuotation)?.length > 0) {
       if (!latestQuotation?.errorType) {
@@ -342,7 +351,7 @@ function RunningSidebar({ EmployeeId }) {
     }
   }, [latestQuotation]);
 
-  console.log(Quotation);
+  // console.log(Quotation);
 
   if (!AQID || !Querys) {
     return (
@@ -502,28 +511,28 @@ function RunningSidebar({ EmployeeId }) {
       <h1 className="text-primary font-medium py-3">Invoice</h1>
 
       <div className="max-h-[350px] overflow-y-scroll">
-        {Quotation.length === 0 ? (
+        {Invoices.length === 0 ? (
           <div className="flex justify-center items-center text-blue-500 h-[100px]">
             No Invoice...
           </div>
         ) : (
-          Quotation.map((q, id) => {
+          Invoices.map((q, id) => {
             return (
               <div
                 className="text-sm flex flex-col bg-blue-100 text-blue-500 shadow-md rounded-sm my-2 mr-4 px-4 py-1"
                 onClick={() => {
                   setvisible(true);
-                  setQuotationFileName(
-                    q.generatedQuotationNumber.split("/")[0] +
+                  setInvoiceFileName(
+                    q.generatedInvoiceNumber.split("/")[0] +
                       "-" +
-                      q.generatedQuotationNumber.split("/")[1]
+                      q.generatedInvoiceNumber.split("/")[1]
                   );
-                  setQuotationData(q);
+                  setInvoiceData(q);
                 }}
               >
                 <p className="py-1">{q.createdAt.split("T")[0]}</p>
                 <div>
-                  <p>{q.generatedQuotationNumber}</p>
+                  <p>{q.generatedInvoiceNumber}</p>
                 </div>
               </div>
             );
@@ -587,6 +596,12 @@ function RunningSidebar({ EmployeeId }) {
         file={QuotationFileName}
         close={setvisible}
         data={QuotationData}
+      />
+      <ViewInvoice
+        visible={visible}
+        file={InvoiceFileName}
+        close={setvisible}
+        data={InvoiceData}
       />
     </div>
   );

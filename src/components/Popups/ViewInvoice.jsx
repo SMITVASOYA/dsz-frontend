@@ -1,35 +1,31 @@
 import { useState, useEffect } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
-function ViewQuotation({ visible, file, close, data }) {
+function ViewInvoice({ visible, file, close, data }) {
   if (data) {
-    var quotation_data = data.quotation_data
-      ? JSON.parse(data.quotation_data)
-      : {};
+    var invoice_data = data.invoice_data ? JSON.parse(data.invoice_data) : {};
     // quotation_data = {};
   }
 
   useEffect(() => {
-    setURL(
-      `${process.env.REACT_APP_HOST}/generate/docs/quotations/${file}.pdf`
-    );
+    setURL(`${process.env.REACT_APP_HOST}/generate/docs/invoices/${file}.pdf`);
   }, [file]);
 
   const [Loading, setLoading] = useState(false);
   const [URL, setURL] = useState(
-    `${process.env.REACT_APP_HOST}/generate/docs/quotations/${file}.pdf`
+    `${process.env.REACT_APP_HOST}/generate/docs/invoices/${file}.pdf`
   );
   const [Error, setError] = useState("");
 
   console.log(URL);
 
   const handelGenerate = async () => {
-    if (!quotation_data[0]) {
-      setError("Quotation Data is Not Available");
+    if (!invoice_data[0]) {
+      setError("Invoice Data is Not Available");
     } else {
-      let pevData = { ...quotation_data[0] };
-      pevData["generatedQuotationNumber"] = data.generatedQuotationNumber;
-      pevData["quotation"] = "old";
+      let pevData = { ...invoice_data[0] };
+      pevData["generatedInvoiceNumber"] = data.generatedInvoiceNumber;
+      //   pevData["quotation"] = "old";
 
       // console.log(pevData);
 
@@ -46,7 +42,7 @@ function ViewQuotation({ visible, file, close, data }) {
       try {
         setError("");
 
-        await fetch("http://localhost:8000/download", requestOptions)
+        await fetch("http://localhost:8000/downloadInvoice", requestOptions)
           .then((response) => response.text())
           .then((text) => {
             setURL(text);
@@ -66,7 +62,7 @@ function ViewQuotation({ visible, file, close, data }) {
       <div className="bg-white w-[98%] md:w-[1000px] h-[85%] overflow-y-scroll  rounded-md">
         <div className="sticky top-0 backdrop-blur-sm bg-bg bg-opacity-20">
           <div className="flex justify-between px-5 md:px-20 pt-5 pb-2">
-            <h1 className="heading text-lg">View Quotation</h1>
+            <h1 className="heading text-lg">View Invoice</h1>
             <XCircleIcon onClick={() => close(false)} className="w-8" />
           </div>
         </div>
@@ -89,7 +85,7 @@ function ViewQuotation({ visible, file, close, data }) {
             </button>
             {URL && (
               <a href={URL} target="_blank" className="md:hidden py-3">
-                View Quotation
+                View Invoice
               </a>
             )}
             <p className="py-5 text-rose-500">{Error !== "" ? Error : null}</p>
@@ -102,4 +98,4 @@ function ViewQuotation({ visible, file, close, data }) {
   );
 }
 
-export default ViewQuotation;
+export default ViewInvoice;

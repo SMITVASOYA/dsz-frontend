@@ -8,6 +8,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePopups } from "../PopupsContext";
 
 function AddNewRequest({ visible, close }) {
+  let source = [
+    "Buylead",
+    "Direct,Call",
+    "Telecaller",
+    "IndiaMart Export",
+    "Who View",
+    "TradeIndia",
+    "Tele Export",
+    "Visiting Card",
+    "Visit Done",
+    "Visit Pending",
+    "Old Quotation",
+    "Just Dial",
+  ];
   const [IsNewClient, setIsNewClient] = useState(false);
   const [MobileExist, setMobileExist] = useState(false);
   const [EmailExist, setEmailExist] = useState(false);
@@ -32,7 +46,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
     };
     axios(config)
@@ -138,7 +152,7 @@ function AddNewRequest({ visible, close }) {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials:true,
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -170,13 +184,13 @@ function AddNewRequest({ visible, close }) {
     }
 
     if (field === "client_email") {
-      var config = {
+      const config = {
         method: "get",
         url: `${process.env.REACT_APP_HOST}/api/client/check?client_email=${e.target.value}`,
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials:true,
+        withCredentials: true,
         credentials: "include",
       };
 
@@ -227,7 +241,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -336,7 +350,7 @@ function AddNewRequest({ visible, close }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };

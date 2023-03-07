@@ -12,7 +12,7 @@ function NewRequrement({ SearchInput, SortType, EmployeeId }) {
     const id = setInterval(() => {
       console.log("interval");
       dispatch(fechUnAssignQuery());
-    }, 5000);
+    }, 50000);
 
     return () => {
       clearInterval(id);

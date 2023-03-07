@@ -288,9 +288,9 @@ export function fetchInvoices(AQID) {
 
           if (resData.error) {
             console.log(resData.error);
-            //   dispatch(setInvoices([]));
-            // } else {
-            //   dispatch(setInvoices(resData.data));
+            dispatch(setInvoices([]));
+          } else {
+            dispatch(setInvoices(resData.data));
           }
         })
         .catch(function (error) {

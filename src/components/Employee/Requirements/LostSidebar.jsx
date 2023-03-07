@@ -9,6 +9,9 @@ import {
   fechCloseQuery,
   fetchQuotations,
   setLQID,
+  setInvoices,
+  setQuotations,
+  fetchInvoices,
 } from "../../../Reducer/querySclice";
 import axios from "axios";
 import { Store } from "react-notifications-component";
@@ -16,6 +19,7 @@ import "react-notifications-component/dist/theme.css";
 import ReqDetails from "./ReqDetails";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import ViewQuotation from "../../Popups/ViewQuotation";
+import ViewInvoice from "../../Popups/ViewInvoice";
 
 function LostSidebar({ EmployeeId }) {
   const dispatch = useDispatch();
@@ -27,11 +31,16 @@ function LostSidebar({ EmployeeId }) {
   const Querys = useSelector((state) => state.query.LostQuery);
   const LQID = useSelector((state) => state.query.LQID);
   const Quotation = useSelector((state) => state.query.Quotations);
+  const Invoices = useSelector((state) => state.query.Invoices);
 
   // for view Quotation
   const [visible, setvisible] = useState(false);
   const [QuotationFileName, setQuotationFileName] = useState("");
   const [QuotationData, setQuotationData] = useState({});
+
+  // for View Invoices
+  const [InvoiceFileName, setInvoiceFileName] = useState("");
+  const [InvoiceData, setInvoiceData] = useState({});
 
   useEffect(() => {
     var config = {
@@ -40,7 +49,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
     };
 
@@ -64,7 +73,10 @@ function LostSidebar({ EmployeeId }) {
   //fatching Quotaions
   useEffect(() => {
     console.log(LQID, "LQID");
+    dispatch(setQuotations([]));
     dispatch(fetchQuotations(LQID));
+    dispatch(setInvoices([]));
+    dispatch(fetchInvoices(LQID));
   }, [LQID]);
 
   const HandelSendToRunning = () => {
@@ -80,7 +92,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -164,7 +176,7 @@ function LostSidebar({ EmployeeId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
       data: data,
     };
@@ -380,6 +392,37 @@ function LostSidebar({ EmployeeId }) {
         )}
       </div>
 
+      <h1 className="text-primary font-medium py-3">Invoice</h1>
+
+      <div className="max-h-[350px] overflow-y-scroll">
+        {Invoices.length === 0 ? (
+          <div className="flex justify-center items-center text-blue-500 h-[100px]">
+            No Invoice...
+          </div>
+        ) : (
+          Invoices.map((q, id) => {
+            return (
+              <div
+                className="text-sm flex flex-col bg-blue-100 text-blue-500 shadow-md rounded-sm my-2 mr-4 px-4 py-1"
+                onClick={() => {
+                  setvisible(true);
+                  setInvoiceFileName(
+                    q.generatedInvoiceNumber.split("/")[0] +
+                      "-" +
+                      q.generatedInvoiceNumber.split("/")[1]
+                  );
+                  setInvoiceData(q);
+                }}
+              >
+                <p className="py-1">{q.createdAt.split("T")[0]}</p>
+                <div>
+                  <p>{q.generatedInvoiceNumber}</p>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
       {/* <div className='flex flex-col mt-4'>
                 <label className='text-primary'>Follow Up</label>
                 <textarea className="my-2 pl-2 h-6 outline-none border-b-2 border-green-500" type="text" ></textarea>
@@ -413,6 +456,12 @@ function LostSidebar({ EmployeeId }) {
         file={QuotationFileName}
         close={setvisible}
         data={QuotationData}
+      />
+      <ViewInvoice
+        visible={visible}
+        file={InvoiceFileName}
+        close={setvisible}
+        data={InvoiceData}
       />
     </div>
   );
