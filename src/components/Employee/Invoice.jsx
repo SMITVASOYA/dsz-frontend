@@ -170,7 +170,7 @@ function Invoice() {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials:true,
+      withCredentials: true,
       credentials: "include",
     };
     axios(config)
@@ -493,7 +493,7 @@ function Invoice() {
       // console.log(Loading);
 
       await fetch(
-        "http://localhost:8000/generate/createInvoice",
+        `${process.env.PDFURL}/generate/createInvoice`,
         requestOptions
       )
         .then((response) => response.text())

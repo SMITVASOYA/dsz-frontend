@@ -570,7 +570,7 @@ function GenerateInvoice({ visible, close }) {
       // console.log(Loading);
 
       await fetch(
-        "http://localhost:8000/generate/createInvoice",
+        `${process.env.PDFURL}/generate/createInvoice`,
         requestOptions
       )
         .then((response) => response.text())

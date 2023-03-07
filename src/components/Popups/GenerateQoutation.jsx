@@ -493,7 +493,7 @@ function GenerateQoutation({ visible, close }) {
 
       // console.log(Loading);
 
-      await fetch("http://localhost:8000/generate/download", requestOptions)
+      await fetch(`${process.env.PDFURL}/generate/download`, requestOptions)
         .then((response) => response.text())
         .then((text) => {
           setLink(text);
