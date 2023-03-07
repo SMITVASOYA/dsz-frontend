@@ -46,7 +46,7 @@ function ViewQuotation({ visible, file, close, data }) {
       try {
         setError("");
 
-        await fetch(`${process.env.PDFURL}/download`, requestOptions)
+        await fetch(`http://128.199.26.175:3006/download`, requestOptions)
           .then((response) => response.text())
           .then((text) => {
             setURL(text);
