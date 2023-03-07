@@ -236,7 +236,7 @@ export function fetchQuotations(AQID) {
     try {
       var config = {
         method: "get",
-        url: `http://128.199.26.175:3006/api/quotation/all/${AQID}`,
+        url: `${process.env.REACT_APP_HOST}/api/quotation/all/${AQID}`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -272,7 +272,7 @@ export function fetchInvoices(AQID) {
     try {
       var config = {
         method: "get",
-        url: `http://128.199.26.175:3006/api/invoice/allInvoice/${AQID}`,
+        url: `${process.env.REACT_APP_HOST}/api/invoice/allInvoice/${AQID}`,
         headers: {
           "Content-Type": "application/json",
         },
