@@ -93,7 +93,7 @@ function GenerateQoutation({ visible, close }) {
     setmetadata({
       date: date,
       suppliers_ref_no: FY,
-      offer_validity: "400 Days",
+      offer_validity: "30 Days",
       payment_terms: "100% Advanced payment",
       dispatch_through: "As Per Your Suggestion",
       destination: "As Per Your Suggestion",
