@@ -42,7 +42,7 @@ function ViewInvoice({ visible, file, close, data }) {
       try {
         setError("");
 
-        await fetch("http://localhost:8000/downloadInvoice", requestOptions)
+        await fetch(`${process.env.PDFURL}/downloadInvoice`, requestOptions)
           .then((response) => response.text())
           .then((text) => {
             setURL(text);
