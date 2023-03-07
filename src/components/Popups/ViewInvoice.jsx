@@ -8,12 +8,12 @@ function ViewInvoice({ visible, file, close, data }) {
   }
 
   useEffect(() => {
-    setURL(`${process.env.REACT_APP_HOST}/generate/docs/invoices/${file}.pdf`);
+    setURL(`http://128.199.26.175:3006/generate/docs/invoices/${file}.pdf`);
   }, [file]);
 
   const [Loading, setLoading] = useState(false);
   const [URL, setURL] = useState(
-    `${process.env.REACT_APP_HOST}/generate/docs/invoices/${file}.pdf`
+    `http://128.199.26.175:3006/generate/docs/invoices/${file}.pdf`
   );
   const [Error, setError] = useState("");
 

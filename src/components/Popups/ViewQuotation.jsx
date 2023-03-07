@@ -10,14 +10,12 @@ function ViewQuotation({ visible, file, close, data }) {
   }
 
   useEffect(() => {
-    setURL(
-      `${process.env.REACT_APP_HOST}/generate/docs/quotations/${file}.pdf`
-    );
+    setURL(`http://128.199.26.175:3006/generate/docs/quotations/${file}.pdf`);
   }, [file]);
 
   const [Loading, setLoading] = useState(false);
   const [URL, setURL] = useState(
-    `${process.env.REACT_APP_HOST}/generate/docs/quotations/${file}.pdf`
+    `http://128.199.26.175:3006/generate/docs/quotations/${file}.pdf`
   );
   const [Error, setError] = useState("");
 
