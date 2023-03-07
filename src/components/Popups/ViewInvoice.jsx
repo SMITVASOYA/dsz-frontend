@@ -51,7 +51,7 @@ function ViewInvoice({ visible, file, close, data }) {
             setURL(text);
           });
       } catch {
-        setError("Error while Generating Quotation!");
+        setError("Error while Generating Invoice!");
       }
       // console.log(URL)
       setLoading(false);
@@ -78,14 +78,14 @@ function ViewInvoice({ visible, file, close, data }) {
           className="W-[90%] h-screen mx-auto"
         >
           <div className="flex justify-center items-center flex-col mt-10">
-            <button
+            {/* <button
               className=" py-2 px-4 bg-green-500 rounded-md shadow-sm text-white"
               onClick={() => {
                 handelGenerate();
               }}
             >
-              {Loading ? "Regenerate Quotation..." : "Regenerate Quotation"}{" "}
-            </button>
+              {Loading ? "Waiting For Invoice..." : "Regenerate Quotation"}{" "}
+            </button> */}
             {URL && (
               <a href={URL} target="_blank" className="md:hidden py-3">
                 View Invoice

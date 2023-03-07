@@ -39,6 +39,7 @@ function LostSidebar({ EmployeeId }) {
   const [QuotationData, setQuotationData] = useState({});
 
   // for View Invoices
+  const [visibleInvoice, setvisibleInvoice] = useState(false);
   const [InvoiceFileName, setInvoiceFileName] = useState("");
   const [InvoiceData, setInvoiceData] = useState({});
 
@@ -405,7 +406,7 @@ function LostSidebar({ EmployeeId }) {
               <div
                 className="text-sm flex flex-col bg-blue-100 text-blue-500 shadow-md rounded-sm my-2 mr-4 px-4 py-1"
                 onClick={() => {
-                  setvisible(true);
+                  setvisibleInvoice(true);
                   setInvoiceFileName(
                     q.generatedInvoiceNumber.split("/")[0] +
                       "-" +
@@ -461,6 +462,12 @@ function LostSidebar({ EmployeeId }) {
         visible={visible}
         file={InvoiceFileName}
         close={setvisible}
+        data={InvoiceData}
+      />
+      <ViewInvoice
+        visible={visibleInvoice}
+        file={InvoiceFileName}
+        close={setvisibleInvoice}
         data={InvoiceData}
       />
     </div>

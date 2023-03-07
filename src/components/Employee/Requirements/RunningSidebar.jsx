@@ -47,6 +47,7 @@ function RunningSidebar({ EmployeeId }) {
   const [QuotationData, setQuotationData] = useState({});
 
   // for View Invoices
+  const [visibleInvoice, setvisibleInvoice] = useState(false);
   const [InvoiceFileName, setInvoiceFileName] = useState("");
   const [InvoiceData, setInvoiceData] = useState({});
 
@@ -521,7 +522,7 @@ function RunningSidebar({ EmployeeId }) {
               <div
                 className="text-sm flex flex-col bg-blue-100 text-blue-500 shadow-md rounded-sm my-2 mr-4 px-4 py-1"
                 onClick={() => {
-                  setvisible(true);
+                  setvisibleInvoice(true);
                   setInvoiceFileName(
                     q.generatedInvoiceNumber.split("/")[0] +
                       "-" +
@@ -598,9 +599,9 @@ function RunningSidebar({ EmployeeId }) {
         data={QuotationData}
       />
       <ViewInvoice
-        visible={visible}
+        visible={visibleInvoice}
         file={InvoiceFileName}
-        close={setvisible}
+        close={setvisibleInvoice}
         data={InvoiceData}
       />
     </div>
